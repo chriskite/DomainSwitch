@@ -1,0 +1,7 @@
+#domainswitch-button {
+  list-style-image: url("chrome://domainswitch/skin/icon_24x24.png");
+}
+
+toolbar[iconsize="small"] #domainswitch-button {
+  list-style-image: url("chrome://domainswitch/skin/icon_16x16.png");
+}

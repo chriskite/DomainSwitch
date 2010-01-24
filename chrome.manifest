@@ -1,0 +1,5 @@
+content	domainswitch content/
+locale	domainswitch	en-US	locale/en-US/
+skin	domainswitch	classic/1.0	skin/
+overlay	chrome://browser/content/browser.xul	chrome://domainswitch/content/domainswitch-browser-overlay.xul
+style	chrome://global/content/customizeToolbar.xul	chrome://domainswitch/skin/toolbar-button.css

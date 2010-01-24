@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://domainswitch/skin/toolbar-button.css" type="text/css"?>
+<overlay id="offers-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    <script type="application/javascript" src="domainswitch.js"/>
+	<script type="application/javascript" src="domainswitch-prefs.js"/>
+	
+	<toolbarpalette id="BrowserToolbarPalette">
+		<toolbarbutton
+			id="domainswitch-button"
+			class="toolbarbutton-1"
+			label="DomainSwitch"
+			type="menu-button"
+			tooltiptext="DomainSwitch">
+			<menupopup id="domainswitch-button-menu" position="after_start" />
+		</toolbarbutton>
+	</toolbarpalette>
+	
+    <toolbox id="navigator-toolbox">
+        <toolbar id="domainswitch-toolbar" toolbarname="DomainSwitch Toolbar" class="chromeclass-toolbar" 
+                 context="toolbar-context-menu" hidden="false" persist="hidden">
+			<toolbaritem id="domainswitch-toolbar-domains" />
+		</toolbar>
+    </toolbox>	
+	
+</overlay>
