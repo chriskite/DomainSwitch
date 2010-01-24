@@ -1,12 +1,15 @@
-domainswitch.prefs = {
+var domainswitch_prefs = {
 	prefs: null,
 	
-	initialize: function() {
-	  this.prefs = Components.classes['@mozilla.org/preferences-service;1']
-	  .getService(Components.interfaces.nsIPrefService)
-	  .getBranch('extensions.domainswitch.');
+	initialize: function(observer) {
+		this.prefs = Components.classes['@mozilla.org/preferences-service;1']
+		.getService(Components.interfaces.nsIPrefService)
+		.getBranch('extensions.domainswitch.');
 	 
-	  this.prefs.QueryInterface(Components.interfaces.nsIPrefBranch2);
+		this.prefs.QueryInterface(Components.interfaces.nsIPrefBranch2);
+		if(observer) {
+			this.prefs.addObserver("", observer, false);
+		}
 	},
 	 
 	getPref: function(name) {

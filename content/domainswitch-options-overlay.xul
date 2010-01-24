@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<dialog id="domainswitch-options"
+		title="DomainSwitch Options"
+		buttons="accept, cancel"
+        onload="domainswitch_options.onLoad(); domainswitch_options.populateDomainsTree();"
+        ondialogaccept="return domainswitch_options.onOK();"
+		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<script type="application/javascript" src="domainswitch-prefs.js"/>
+	<script type="application/javascript" src="domainswitch-options.js"/>		
+		
+	<vbox id="domainswitch-box" flex="1">
+		<label id="domainswitch-options-instructions"
+			   value="Configure the domains to switch between" />
+		<separator />
+
+		<tree id="domainswitch-domains-tree" 
+			  flex="1"
+			  hidecolumnpicker="true"
+			  rows="10"
+			  seltype="single">
+			<treecols>
+				<treecol id="domainswitch-domains-tree-domain-column" label="Domains" flex="1" persist="width"/>
+			</treecols>
+			<treechildren id="domainswitch-domains-tree-children">
+			</treechildren>
+		</tree>
+
+		<separator />
+
+		<hbox>
+			<button id="domainswitch-options-button-add"
+					label="Add Domain" 
+					oncommand="domainswitch_options.onAdd()"/>
+			<button id="domainswitch-options-button-delete"
+					label="Delete Domain"
+					oncommand="domainswitch_options.onDelete()"/>
+		</hbox>
+		
+	</vbox>
+</dialog>

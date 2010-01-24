@@ -10,7 +10,8 @@
                    em:version="0.1"
                    em:creator="Chris Kite"
                    em:description="Easily switch between the same relative URL on different domains"
-				   em:iconURL="chrome://domainswitch/skin/icon_32x32.png">
+				   em:iconURL="chrome://domainswitch/skin/icon_32x32.png"
+				   em:optionsURL="chrome://domainswitch/content/domainswitch-options-overlay.xul">
     <em:targetApplication RDF:resource="rdf:#$Bxi7P2"/>
     <em:file RDF:resource="urn:mozilla:extension:file:"/>
   </RDF:Description>

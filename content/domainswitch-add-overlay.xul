@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<dialog id="domainswitch-add"
+		title="Add a Domain"
+		buttons="accept, cancel"
+        style="width: 40em"
+		onload="domainswitch_options.onLoad();"
+        ondialogaccept="return domainswitch_options.onAddOK();"
+		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<script type="application/javascript" src="domainswitch-prefs.js"/>
+	<script type="application/javascript" src="domainswitch-options.js"/>			
+		
+	<label>Enter a domain (e.g. www.example.com)</label>
+	<textbox id="domainswitch-add-domain" />
+
+</dialog>

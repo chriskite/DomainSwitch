@@ -2,21 +2,34 @@ var XUL_NS = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
 var XHTML_NS = "http://www.w3.org/1999/xhtml";
 
 var domainswitch = {
-	
 	initialized: false,
-
+	
 	onLoad: function() {
-		// initialization code
-		this.prefs.initialize();
-		
-		//check if this is the first run of a new version
-		if(this.prefs.getPref('version') != '0.1') {
-			this.prefs.setPref('version', '0.1');
-		}		
-		
-		this.initialize();
+		if(!this.initialized) {
+			// initialization code
+			this.prefs = domainswitch_prefs;
+			this.prefs.initialize(this); //add this as a prefs observer
+			
+			//check if this is the first run of a new version
+			if(this.prefs.getPref('version') != '0.1') {
+				this.prefs.setPref('version', '0.1');
+			}		
+			
+			this.initialize();
+			this.initialized = true;
+		}
 	},
 
+	onConfigure: function()
+	{
+		var winOptions = openDialog('chrome://domainswitch/content/domainswitch-options-overlay.xul', 
+					'domainswitch-options', 
+					'centerscreen,chrome,resizable,dialog=no');
+		try {
+			winOptions.focus();
+		} catch (ex) {
+		}
+	},
 		
 	initialize: function()
 	{
@@ -32,27 +45,25 @@ var domainswitch = {
 				this.addDomainToolbarMenuitem(domains[i]);
 			}
 		}
-		
-		this.initialized = true;
 	},
 	
 	initToolbarButton: function()
 	{
 		var button = document.getElementById('domainswitch-button');
 		button.setAttribute('disabled', 'true');
+		
+		var menupopup = document.getElementById('domainswitch-button-menu');
+		while(menupopup.hasChildNodes()){
+			menupopup.removeChild(menupopup.firstChild);
+		}
 	},
 	
 	initToolbar: function()
 	{
-		var toolbar = document.getElementById('domainswitch-toolbar');
-		var spacer = document.createElement('toolbarspacer');
-		spacer.setAttribute('flex', '1');
-		toolbar.appendChild(spacer);
-		
-		var configure_button = document.createElement('toolbarbutton');
-		configure_button.setAttribute('image', 'chrome://domainswitch/skin/computer_edit.png');
-		configure_button.setAttribute('label', 'Configure DomainSwitch');
-		toolbar.appendChild(configure_button);
+		var domains = document.getElementById('domainswitch-toolbar-domains');
+		while(domains.hasChildNodes()){
+			domains.removeChild(domains.firstChild);
+		}
 	},	
 	
 	addDomainToolbarMenuitem: function(domain)
@@ -71,7 +82,7 @@ var domainswitch = {
 		
 		menu.appendChild(menuitem);	
 	},
-	
+
 	addDomainButton: function(domain)
 	{
 		var toolbar = document.getElementById('domainswitch-toolbar-domains');
@@ -91,7 +102,12 @@ var domainswitch = {
 		var path = cur_url.substr(cur_url.indexOf('/', 8));
 		var url = 'http://' + domain + path;
 		content.document.location = url;
-	}
+	},
+	
+	observe: function()
+	{
+		this.initialize();
+	},
 
 };
 window.addEventListener("load", function(e) { domainswitch.onLoad(e); }, false);
