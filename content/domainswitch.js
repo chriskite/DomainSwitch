@@ -99,7 +99,14 @@ var domainswitch = {
 	switchTo: function(domain)
 	{
 		var cur_url = content.document.location + '';
-		var path = cur_url.substr(cur_url.indexOf('/', 8));
+		var path;
+
+		if(cur_url.indexOf('http') < 0) {
+			path = '';
+		} else {
+			path = cur_url.substr(cur_url.indexOf('/', 8));
+		}
+		
 		var url = 'http://' + domain + path;
 		content.document.location = url;
 	},
